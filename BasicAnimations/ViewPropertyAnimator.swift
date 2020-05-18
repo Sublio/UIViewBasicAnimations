@@ -11,14 +11,17 @@ import UIKit
 
 class ViewoPropertyAnimator: UIViewController {
     
-    let animator = UIViewPropertyAnimator(duration: 1, curve: .linear, animations: nil)
+    //let animator = UIViewPropertyAnimator(duration: 1, curve: .linear, animations: nil)
+    var animator: UIViewPropertyAnimator!
     
     var boxWidthAnchor: NSLayoutConstraint!
+    
+    let box = UIView()
     
     override func viewDidLoad() {
         view.backgroundColor = .white
         
-        let box = UIView()
+        
         box.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(box)
         boxWidthAnchor = box.widthAnchor.constraint(equalToConstant: 100)
@@ -29,9 +32,11 @@ class ViewoPropertyAnimator: UIViewController {
         box.backgroundColor = .red
 
         
-        animator.addAnimations {
-            box.backgroundColor = .blue
-        }
+//        animator.addAnimations {
+//            box.backgroundColor = .blue
+//            self.view.layoutIfNeeded()
+//        }
+//
         
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
@@ -45,6 +50,13 @@ class ViewoPropertyAnimator: UIViewController {
     }
     
     @objc fileprivate func handleSliderChanger(slider: UISlider){
-        animator.fractionComplete = CGFloat(slider.value)
+        boxWidthAnchor.constant = CGFloat(100 + (slider.value * 100))
+        //animator.fractionComplete = CGFloat(slider.value)
+        
+        animator = UIViewPropertyAnimator(duration: 2, dampingRatio: 0.5, animations: {
+            self.view.layoutIfNeeded()
+            self.box.backgroundColor = .blue
+        })
+        animator.startAnimation()
     }
 }
