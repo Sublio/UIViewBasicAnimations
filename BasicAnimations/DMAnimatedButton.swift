@@ -16,12 +16,14 @@ class DMAnimatedButton: UIButton {
     
     init(title: String) {
         super.init(frame: .zero)
+        translatesAutoresizingMaskIntoConstraints = false
+        widthAnchor.constraint(equalToConstant: 150).isActive = true
+        heightAnchor.constraint(equalToConstant: 54).isActive = true
         phaseTwo(title: title)
     }
     
     fileprivate func phaseTwo(title: String){
         
-        translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 12
         backgroundColor = .blue
         setTitle(title, for: .normal)

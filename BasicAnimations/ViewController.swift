@@ -22,6 +22,10 @@ class ViewController: UIViewController {
         let button = DMAnimatedButton(title: "Denis")
         view.addSubview(button)
         
+        button.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+
+        
 //        basicView.backgroundColor = .blue
 //        basicView.translatesAutoresizingMaskIntoConstraints = false
 //        view.addSubview(basicView)
