@@ -13,6 +13,7 @@
 		4C1FAC2D2470AB9C00F351EB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C1FAC2B2470AB9C00F351EB /* Main.storyboard */; };
 		4C1FAC2F2470AB9D00F351EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C1FAC2E2470AB9D00F351EB /* Assets.xcassets */; };
 		4C1FAC322470AB9D00F351EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C1FAC302470AB9D00F351EB /* LaunchScreen.storyboard */; };
+		4C222033247341E1006BE5B5 /* ViewPropertyAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C222032247341E1006BE5B5 /* ViewPropertyAnimator.swift */; };
 		4C67C37B24731AB600BF4A10 /* DMAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C67C37A24731AB600BF4A10 /* DMAnimatedButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		4C1FAC2E2470AB9D00F351EB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C1FAC312470AB9D00F351EB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4C1FAC332470AB9D00F351EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C222032247341E1006BE5B5 /* ViewPropertyAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPropertyAnimator.swift; sourceTree = "<group>"; };
 		4C67C37A24731AB600BF4A10 /* DMAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMAnimatedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +68,7 @@
 				4C1FAC302470AB9D00F351EB /* LaunchScreen.storyboard */,
 				4C1FAC332470AB9D00F351EB /* Info.plist */,
 				4C67C37A24731AB600BF4A10 /* DMAnimatedButton.swift */,
+				4C222032247341E1006BE5B5 /* ViewPropertyAnimator.swift */,
 			);
 			path = BasicAnimations;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 				4C67C37B24731AB600BF4A10 /* DMAnimatedButton.swift in Sources */,
 				4C1FAC262470AB9C00F351EB /* AppDelegate.swift in Sources */,
 				4C1FAC282470AB9C00F351EB /* SceneDelegate.swift in Sources */,
+				4C222033247341E1006BE5B5 /* ViewPropertyAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
