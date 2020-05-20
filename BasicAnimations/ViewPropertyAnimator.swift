@@ -16,8 +16,10 @@ class ViewoPropertyAnimator: UIViewController {
     fileprivate var imageView: UIImageView = UIImageView(image: UIImage(named: "background_picture"))
     fileprivate var blurView: UIVisualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .prominent))
         
+    let box = UIView()
     
     override func viewDidLoad() {
+        
         view.backgroundColor = .white
         
         view.addSubview(imageView)
@@ -29,11 +31,34 @@ class ViewoPropertyAnimator: UIViewController {
         self.blurView.alpha = 0.5
         animator.addAnimations {
             self.blurView.alpha = 1
-            self.imageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+            self.imageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5 )
         }
 
         
-      setupSlider()
+        setupSlider()
+        
+        box.backgroundColor = .red
+        box.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(box)
+        box.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        box.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        box.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        box.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        perform(#selector(self.animateBox), with: nil, afterDelay: 1)
+        
+        
+        
+    }
+    
+    @objc fileprivate func animateBox(){
+        UIView.animate(withDuration: 0.3, delay: 1, usingSpringWithDamping: 0.5, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+            var transform = CGAffineTransform.identity
+            transform = transform.scaledBy(x: 1.1, y: 1.6)
+            transform = transform.translatedBy(x: 30, y: 50)
+            transform = transform.rotated(by: 45)
+            self.box.transform = transform
+        }, completion: nil)
         
     }
     
