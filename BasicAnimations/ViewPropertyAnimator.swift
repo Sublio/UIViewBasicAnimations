@@ -33,9 +33,19 @@ class ViewoPropertyAnimator: UIViewController {
             self.imageView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5 )
         }
 
+        setupCGradientLayer()
         setupCABasic()
         setupSlider()
 
+    }
+    
+    fileprivate func setupCGradientLayer(){
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = blurView.frame
+        gradient.colors = [UIColor.red.cgColor, UIColor.cyan.cgColor]
+        gradient.locations = [0.1, 0.2]
+        blurView.layer.addSublayer(gradient)
     }
     
     fileprivate func setupCABasic(){
