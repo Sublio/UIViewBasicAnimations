@@ -39,8 +39,34 @@ class ViewoPropertyAnimator: UIViewController {
 //        setupSlider()
         //setupCAKeyFrame()
         blurView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        perform(#selector(shake), with: nil, afterDelay: 4)
+        //perform(#selector(shake), with: nil, afterDelay: 4)
+        
+        setupUIViewAnimateKeyFrame()
 
+    }
+    
+    fileprivate func setupUIViewAnimateKeyFrame(){
+        
+        let center = self.imageView.center
+        
+        UIView.animateKeyframes(withDuration: 8, delay: 0, options: .calculationModeCubic, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1) {
+                self.imageView.transform = CGAffineTransform(scaleX: 2, y: 2)
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.3) {
+                self.imageView.center = CGPoint(x: center.x + 100, y: center.y + 100)
+                       }
+            UIView.addKeyframe(withRelativeStartTime: 0.3, relativeDuration: 0.3) {
+                           self.imageView.center = CGPoint(x: center.x - 100, y: center.y - 100)
+                       }
+            UIView.addKeyframe(withRelativeStartTime: 0.4, relativeDuration: 0.4) {
+                           self.imageView.center = CGPoint(x: center.x + 100, y: center.y - 100)
+                       }
+            UIView.addKeyframe(withRelativeStartTime: 0.7, relativeDuration: 0.3) {
+                                      self.imageView.center = center
+                                  }
+        })
     }
 
     @objc fileprivate func shake() {
@@ -49,14 +75,18 @@ class ViewoPropertyAnimator: UIViewController {
             CGPoint(x: 0, y: 0),
             CGPoint(x: -20, y: -20),
             CGPoint(x: 20, y: 20),
-            CGPoint(x: 0, y: 0)
+            CGPoint(x: -10, y: -10),
+            CGPoint(x: 10, y: 10),
+            CGPoint(x: 0, y: 0),
+            CGPoint(x: -10, y: -10)
         ]
         animation.keyTimes = [
-            0, 0.25, 0.5, 1
+            0, 0.1, 0.25, 0.4, 0.6, 0.8, 1
         ]
 
-        animation.duration = 0.25
+        animation.duration = 0.5
         animation.isAdditive = true
+        animation.repeatCount = 10
         blurView.layer.add(animation, forKey: "shakeAnimation")
     }
 
