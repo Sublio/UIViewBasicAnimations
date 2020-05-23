@@ -41,6 +41,7 @@ class ViewController: UIViewController {
 //        perform(#selector(animateBox), with: nil, afterDelay: 1)
 //
 //        basicView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.animateOnTap)))
+        
     }
     
     @objc fileprivate func animateBox(){
