@@ -32,7 +32,7 @@ class DMAnimatedButton: UIButton {
     fileprivate func phaseTwo(title: String) {
 
         layer.cornerRadius = 12
-        backgroundColor = .blue
+        backgroundColor = .darkGray
         setTitle(title, for: .normal)
         titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         //self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(animateButton)))
@@ -48,8 +48,8 @@ class DMAnimatedButton: UIButton {
     @objc fileprivate func down() {
         wAnchor?.isActive = false
         hAnchor?.isActive = false
-        wAnchor?.constant = 100
-        hAnchor?.constant = 100
+        wAnchor?.constant = 150
+        hAnchor?.constant = 40
 
         wAnchor?.isActive = true
         hAnchor?.isActive = true

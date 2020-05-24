@@ -21,6 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            vc.title = "View animator"
 
            let navigationController = UINavigationController()
+           let barStyle = UIBarStyle.init(rawValue: 3)
+            
+           navigationController.navigationBar.barStyle = barStyle!
            navigationController.viewControllers = [vc]
 
            window?.rootViewController = navigationController
