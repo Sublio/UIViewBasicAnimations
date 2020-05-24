@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ViewoPropertyAnimator: UIViewController {
+class ViewPropertyAnimator: UIViewController {
 
     let animator = UIViewPropertyAnimator(duration: 1, curve: .linear, animations: nil)
 
@@ -40,20 +40,20 @@ class ViewoPropertyAnimator: UIViewController {
         //setupCAKeyFrame()
         blurView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         //perform(#selector(shake), with: nil, afterDelay: 4)
-        
+
         setupUIViewAnimateKeyFrame()
 
     }
-    
-    fileprivate func setupUIViewAnimateKeyFrame(){
-        
+
+    fileprivate func setupUIViewAnimateKeyFrame() {
+
         let center = self.imageView.center
-        
+
         UIView.animateKeyframes(withDuration: 8, delay: 0, options: .calculationModeCubic, animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.1) {
                 self.imageView.transform = CGAffineTransform(scaleX: 2, y: 2)
             }
-            
+
             UIView.addKeyframe(withRelativeStartTime: 0.1, relativeDuration: 0.3) {
                 self.imageView.center = CGPoint(x: center.x + 100, y: center.y + 100)
                        }
