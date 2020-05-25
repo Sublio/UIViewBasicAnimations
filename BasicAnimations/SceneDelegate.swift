@@ -17,12 +17,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
            window = UIWindow(frame: windowScene.coordinateSpace.bounds)
            window?.windowScene = windowScene
-           let vc = NotificationController()
-           vc.title = "View animator"
+           let vc = SnapRefreashController()
+           vc.title = "Snap Animation View Controller"
 
            let navigationController = UINavigationController()
            let barStyle = UIBarStyle.init(rawValue: 3)
-            
+
            navigationController.navigationBar.barStyle = barStyle!
            navigationController.viewControllers = [vc]
 
