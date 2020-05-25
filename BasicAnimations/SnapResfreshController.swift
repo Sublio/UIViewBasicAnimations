@@ -9,13 +9,37 @@
 import Foundation
 import UIKit
 
-class SnapRefreashController: UIViewController {
+class SnapRefreshController: UIViewController {
 
     fileprivate let startingHeight: CGFloat = 50
     fileprivate let shapeLayer: CAShapeLayer = CAShapeLayer()
 
+    fileprivate let leftThree = UIView()
+    fileprivate let leftTwo = UIView()
+    fileprivate let leftOne = UIView()
+    fileprivate let centerZero = UIView()
+    fileprivate let rightOne = UIView()
+    fileprivate let rightTwo = UIView()
+    fileprivate let rightThree = UIView()
+
+    fileprivate lazy var views: [UIView] = [
+        leftThree,
+        leftTwo,
+        leftOne,
+        centerZero,
+        rightOne,
+        rightTwo,
+        rightThree
+    ]
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        views.forEach {(layoutViewPoint) in
+            layoutViewPoint.frame = CGRect(x: 0, y: 0, width: 4, height: 4)
+            layoutViewPoint.backgroundColor = .cyan
+            view.addSubview(layoutViewPoint)
+        }
 
         shapeLayer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: startingHeight)
         shapeLayer.backgroundColor  = UIColor.darkGray.cgColor

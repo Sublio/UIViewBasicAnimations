@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
            window = UIWindow(frame: windowScene.coordinateSpace.bounds)
            window?.windowScene = windowScene
-           let vc = SnapRefreashController()
+           let vc = SnapRefreshController()
            vc.title = "Snap Animation View Controller"
 
            let navigationController = UINavigationController()
