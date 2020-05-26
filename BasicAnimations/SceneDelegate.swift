@@ -26,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
            navigationController.navigationBar.barStyle = barStyle!
            navigationController.viewControllers = [vc]
 
-           window?.rootViewController = navigationController
+           window?.rootViewController = vc
            window?.makeKeyAndVisible()
     }
 
