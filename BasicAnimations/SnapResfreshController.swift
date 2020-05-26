@@ -8,10 +8,19 @@
 
 import Foundation
 import UIKit
+extension UIView {
+    func fetchCenter(animating: Bool) -> CGPoint {
+        if animating, let presenation = layer.presentation() {
+
+            return presenation.position
+        }
+        return center
+    }
+}
 
 class SnapRefreshController: UIViewController {
 
-    fileprivate let startingHeight: CGFloat = 50
+    fileprivate let startingHeight: CGFloat = 150
 
     fileprivate let maxDragHeight: CGFloat = 150
     fileprivate let shapeLayer: CAShapeLayer = CAShapeLayer()
@@ -34,17 +43,25 @@ class SnapRefreshController: UIViewController {
         rightThree
     ]
 
-    fileprivate func generatePath() {
+    fileprivate var displayLink: CADisplayLink!
+    fileprivate var animating = false {
+        didSet {
+            view.isUserInteractionEnabled = !animating
+            displayLink.isPaused = !animating
+        }
+    }
+
+    @objc fileprivate func generatePath() {
 
         let screenWidht = UIScreen.main.bounds.width
 
-        let leftThreeCenter = leftThree.center
-        let leftTwoCenter = leftTwo.center
-        let leftOneCenter = leftOne.center
-        let centerZeroCenter = centerZero.center
-        let rightOneCenter = rightOne.center
-        let rightTwoCenter = rightTwo.center
-        let rightThreeCenter = rightThree.center
+        let leftThreeCenter = leftThree.fetchCenter(animating: animating)
+        let leftTwoCenter = leftTwo.fetchCenter(animating: animating)
+        let leftOneCenter = leftOne.fetchCenter(animating: animating)
+        let centerZeroCenter = centerZero.fetchCenter(animating: animating)
+        let rightOneCenter = rightOne.fetchCenter(animating: animating)
+        let rightTwoCenter = rightTwo.fetchCenter(animating: animating)
+        let rightThreeCenter = rightThree.fetchCenter(animating: animating)
 
         let bezierPath = UIBezierPath()
         bezierPath.move(to: CGPoint(x: 0, y: 0))
@@ -63,15 +80,13 @@ class SnapRefreshController: UIViewController {
         let leftPart = dragX - minX
         let rightPart = maxX - dragX
         leftThree.center = CGPoint(x: minX, y: minHeight)
-        
-        
-        leftTwo.center = CGPoint(x: minX + (leftPart * 0.44) , y: minHeight)
+
+        leftTwo.center = CGPoint(x: minX + (leftPart * 0.44), y: minHeight)
         leftOne.center = CGPoint(x: minX + (leftPart * 0.71), y: minHeight + (dragY * 0.64))
         centerZero.center = CGPoint(x: dragX, y: minHeight + (dragY * 1.36))
         rightOne.center = CGPoint(x: maxX - (rightPart * 0.71), y: minHeight + (dragY * 0.64))
         rightTwo.center = CGPoint(x: maxX - (rightPart * 0.44), y: minHeight)
-        
-        
+
         rightThree.center = CGPoint(x: maxX, y: minHeight)
     }
 
@@ -92,12 +107,28 @@ class SnapRefreshController: UIViewController {
         shapeLayer.fillColor  = UIColor.darkGray.cgColor
         view.layer.addSublayer(shapeLayer)
         view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.userIsDragging)))
+        setupCADisplayLink()
 
+    }
+
+    fileprivate func setupCADisplayLink() {
+        displayLink = CADisplayLink(target: self, selector: #selector(generatePath))
+        displayLink.add(to: RunLoop.main, forMode: RunLoop.Mode.default)
     }
 
     @objc fileprivate func userIsDragging(gesture: UIPanGestureRecognizer) {
 
         if gesture.state == .ended || gesture.state == .failed || gesture.state == .cancelled {
+            animating = true
+            UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+                self.views.forEach { (view) in
+                    view.center.y = self.startingHeight
+                }
+            }) { (complete) in
+                if complete {
+                    self.animating = false
+                }
+            }
 
         } else {
             //shapeLayer.frame.size.height = startingHeight + gesture.translation(in: self.view).y
