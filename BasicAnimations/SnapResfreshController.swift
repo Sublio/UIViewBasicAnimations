@@ -60,17 +60,24 @@ class SnapRefreshController: UIViewController {
     fileprivate func layoutViewPoints(minHeight: CGFloat, dragY: CGFloat, dragX: CGFloat) {
         let minX: CGFloat = 0
         let maxX: CGFloat = view.frame.width
+        let leftPart = dragX - minX
+        let rightPart = maxX - dragX
         leftThree.center = CGPoint(x: minX, y: minHeight)
-        leftTwo.center = CGPoint(x: minX, y: minHeight + dragY)
-        leftOne.center = CGPoint(x: minX, y: minHeight)
-        centerZero.center = CGPoint(x: dragX, y: minHeight + dragY * 2)
-        rightOne.center = CGPoint(x: maxX, y: minHeight)
-        rightTwo.center = CGPoint(x: maxX, y: minHeight + dragY)
+        
+        
+        leftTwo.center = CGPoint(x: minX + (leftPart * 0.44) , y: minHeight)
+        leftOne.center = CGPoint(x: minX + (leftPart * 0.71), y: minHeight + (dragY * 0.64))
+        centerZero.center = CGPoint(x: dragX, y: minHeight + (dragY * 1.36))
+        rightOne.center = CGPoint(x: maxX - (rightPart * 0.71), y: minHeight + (dragY * 0.64))
+        rightTwo.center = CGPoint(x: maxX - (rightPart * 0.44), y: minHeight)
+        
+        
         rightThree.center = CGPoint(x: maxX, y: minHeight)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
 
         views.forEach {(layoutViewPoint) in
             layoutViewPoint.frame = CGRect(x: 0, y: 0, width: 4, height: 4)
@@ -78,7 +85,7 @@ class SnapRefreshController: UIViewController {
             view.addSubview(layoutViewPoint)
         }
 
-        layoutViewPoints(minHeight: startingHeight, dragY: 100, dragX: view.frame.width / 2)
+        layoutViewPoints(minHeight: startingHeight, dragY: 0, dragX: view.frame.width / 2)
         generatePath()
 
         //shapeLayer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: startingHeight)
